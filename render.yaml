@@ -144,7 +144,12 @@ services:
   - type: web
     name: arkcare-bridge
     runtime: node
-    plan: starter
+    # Free tier. The bridge spins down after ~15 min idle and wakes on the next
+    # request, which costs a cold start but nothing else: every blockchain write
+    # already has a timeout and the app treats the chain as non-clinical, so a
+    # cold bridge shows as "offline" rather than breaking care workflows.
+    # Move to `starter` only if a judge demo needs it permanently warm.
+    plan: free
     region: oregon
     rootDir: Blockchain
     buildCommand: npm ci
