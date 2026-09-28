@@ -1,0 +1,57 @@
+name: CareQuest Pixel UI Validation
+
+on:
+  push:
+    branches:
+      - feature/carequest-light-pixel-ui
+  workflow_dispatch:
+
+concurrency:
+  group: carequest-light-pixel-ui
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: [self-hosted]
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Frontend install and production build
+        working-directory: Frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Backend syntax
+        shell: bash
+        run: |
+          if command -v python >/dev/null 2>&1; then
+            python -m py_compile Backend/chatbotwithpdf.py
+          else
+            python3 -m py_compile Backend/chatbotwithpdf.py
+          fi
+
+      - name: Install blockchain dependencies
+        working-directory: Blockchain
+        run: npm install
+
+      - name: MST testnet RPC reachability
+        working-directory: Blockchain
+        run: node scripts/wait-for-rpc.js
+
+      - name: Install CareQuest browser test dependency
+        working-directory: Frontend
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install chromium
+
+      - name: Multi-hospital CareQuest browser E2E
+        env:
+          CAREQUEST_UI_E2E_BASE_URL: http://127.0.0.1:13002
+          # The chain is MST testnet. On-chain assertions need
+          # BRIDGEKEY_PRIVATE_KEY and Blockchain/runtime/deployment.json, both
+          # of which are git-ignored and are not present on a CI checkout, so
+          # the chain is skipped unless the secrets are provided.
+          CAREQUEST_UI_E2E_CHAIN: ${{ vars.CAREQUEST_UI_E2E_CHAIN || '0' }}
+        run: node Frontend/tests/carequest-pixel-e2e.cjs

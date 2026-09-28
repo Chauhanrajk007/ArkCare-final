@@ -1,0 +1,72 @@
+# =============================================================================
+# Dependencies
+# =============================================================================
+node_modules/
+.pnp
+.pnp.js
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# =============================================================================
+# Build output
+# =============================================================================
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Clerk local state
+.clerk/
+
+# solc leftovers (the contracts are compiled directly with solc, no Hardhat)
+Blockchain/cache/
+Blockchain/artifacts/
+
+# =============================================================================
+# Runtime state
+# =============================================================================
+# Bridge logs, dedupe state, and local pid/log files. The deployment record
+# itself is deliberately NOT ignored - it holds only public contract addresses
+# and ABIs (no keys), and the bridge cannot start without it.
+Blockchain/runtime/*
+!Blockchain/runtime/deployment.json
+.runtime/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# =============================================================================
+# Secrets - NEVER COMMIT
+# =============================================================================
+# These hold LIVE credentials: Pusher/Razorpay/Cloudinary keys, the Agora
+# certificate, Groq/Pinecone keys, the MongoDB password, AUTH_SECRET, QStash
+# tokens, and BRIDGEKEY_PRIVATE_KEY (the blockchain signing key).
+Frontend/.env.local
+Frontend/.env
+Backend/.env
+arkcare.env
+backend.env
+frontend.env
+.env
+.env.*.local
+*.pem
+*.key
+!*.env.example
+
+# =============================================================================
+# OS / editor noise
+# =============================================================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

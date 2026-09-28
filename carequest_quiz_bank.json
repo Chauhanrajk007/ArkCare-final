@@ -1,0 +1,319 @@
+{
+  "metadata": {
+    "title": "CareQuest Health Awareness Quiz Bank",
+    "total_questions": 149,
+    "total_categories": 22,
+    "description": "Public-health education quiz content for RAG-based patient engagement. Each question is sourced from WHO or equivalent authoritative fact sheets. Use category 'patient_niche' to match questions to a patient's condition profile.",
+    "usage_notes": [
+      "These are general public-health education questions, not personalized medical advice.",
+      "A clinician should approve which categories are shown to which patient profiles.",
+      "Numeric statistics reflect each source's publication/review date and may be updated periodically by WHO; verify before production use.",
+      "Recommended retrieval pattern: match patient_niche tags to a patient's condition(s), then retrieve a mixed set across 2-3 relevant categories rather than one category alone."
+    ]
+  },
+  "categories": {
+    "heart_cardiovascular": {
+      "title": "Heart & Cardiovascular Health",
+      "patient_niche": "hypertension, heart disease, post-cardiac-event, stroke risk",
+      "source": "WHO Cardiovascular Diseases Fact Sheet",
+      "questions": [
+        {"id":"Q001","question":"What is the leading cause of death globally?","options":["Cancer","Cardiovascular diseases","Respiratory infections","Diabetes"],"correct_answer":"Cardiovascular diseases","explanation":"CVDs cause an estimated 19.8 million deaths per year, about 32% of all global deaths."},
+        {"id":"Q002","question":"What percentage of cardiovascular disease deaths are caused by heart attacks and strokes?","options":["50%","65%","85%","95%"],"correct_answer":"85%","explanation":"Over 3 in 4 CVD deaths are due to heart attack and stroke."},
+        {"id":"Q003","question":"Which of these is NOT a major behavioural risk factor for heart disease?","options":["Unhealthy diet","Physical inactivity","Reading books","Tobacco use"],"correct_answer":"Reading books","explanation":"The main behavioural risks are unhealthy diet, inactivity, tobacco, and harmful alcohol use."},
+        {"id":"Q004","question":"What is the leading risk factor driving cardiovascular disease in Europe?","options":["High cholesterol","High blood pressure (hypertension)","Obesity","Diabetes"],"correct_answer":"High blood pressure (hypertension)","explanation":"Hypertension caused almost a quarter of Europe's CVD deaths in 2019."},
+        {"id":"Q005","question":"How much moderate-intensity aerobic activity per week is recommended to help protect heart health?","options":["30 minutes","60 minutes","150–300 minutes","500 minutes"],"correct_answer":"150–300 minutes","explanation":"WHO recommends 150–300 minutes of moderate-intensity aerobic activity weekly for adults."},
+        {"id":"Q006","question":"Which dietary change is recommended to reduce cardiovascular risk?","options":["Increase salt intake","Eat more fruits and vegetables","Increase saturated fat","Skip breakfast"],"correct_answer":"Eat more fruits and vegetables","explanation":"WHO recommends reducing salt, eating more fruits/vegetables, and regular physical activity."},
+        {"id":"Q007","question":"Rheumatic heart disease is caused by complications of which untreated infection?","options":["Common cold","Streptococcal throat infection","Influenza","Malaria"],"correct_answer":"Streptococcal throat infection","explanation":"Rheumatic heart disease results from damage caused by rheumatic fever, triggered by untreated strep throat."},
+        {"id":"Q008","question":"What is considered a healthy adult resting blood pressure range approximately?","options":["Around 120/80 mmHg","Around 160/100 mmHg","Around 90/40 mmHg","Around 200/120 mmHg"],"correct_answer":"Around 120/80 mmHg","explanation":"Normal blood pressure is generally around 120/80 mmHg; higher levels indicate hypertension risk."},
+        {"id":"Q009","question":"Which region reports the highest proportion of deaths from cardiovascular disease among WHO regions?","options":["African Region","European Region","Region of the Americas","Western Pacific"],"correct_answer":"European Region","explanation":"CVDs account for 42.5% of all deaths in the WHO European Region, the highest proportion globally."},
+        {"id":"Q010","question":"What is the most effective way to detect cardiovascular disease early?","options":["Waiting for symptoms","Regular screening and check-ups","Only visiting a doctor during emergencies","Home remedies"],"correct_answer":"Regular screening and check-ups","explanation":"Early detection through screening allows management with counselling and medicines before serious events occur."},
+        {"id":"Q011","question":"Which everyday habit change is proven to reduce cardiovascular disease risk?","options":["Increasing salt in the diet","Reducing salt intake and eating more fruits and vegetables","Avoiding all physical activity","Increasing alcohol consumption"],"correct_answer":"Reducing salt intake and eating more fruits and vegetables","explanation":"WHO confirms that reducing dietary salt and eating more fruit and vegetables reduces cardiovascular disease risk."},
+        {"id":"Q012","question":"What role does harmful alcohol use play in cardiovascular health?","options":["It has no effect on the heart","It is one of the major behavioural risk factors for heart disease","It always protects the heart","It only affects the liver, not the heart"],"correct_answer":"It is one of the major behavioural risk factors for heart disease","explanation":"Harmful use of alcohol is listed among the most important behavioural risk factors for cardiovascular disease."}
+      ]
+    },
+    "diabetes_metabolic": {
+      "title": "Diabetes & Metabolic Health",
+      "patient_niche": "type 2 diabetes, prediabetes, metabolic syndrome",
+      "source": "WHO Diabetes Fact Sheet, IDF Diabetes Prevention",
+      "questions": [
+        {"id":"Q013","question":"Type 2 diabetes occurs when the body cannot effectively use which hormone?","options":["Adrenaline","Insulin","Cortisol","Thyroxine"],"correct_answer":"Insulin","explanation":"Diabetes occurs when the pancreas doesn't produce enough insulin or the body can't use it effectively."},
+        {"id":"Q014","question":"How many minutes of moderate exercise per week helps prevent type 2 diabetes?","options":["At least 30 minutes","At least 150 minutes","At least 500 minutes","No exercise needed"],"correct_answer":"At least 150 minutes","explanation":"WHO recommends at least 150 minutes of moderate exercise weekly to help prevent type 2 diabetes."},
+        {"id":"Q015","question":"What percentage of cardiovascular deaths were linked to high blood glucose according to WHO?","options":["1%","5%","11%","25%"],"correct_answer":"11%","explanation":"Around 11% of cardiovascular deaths were caused by high blood glucose."},
+        {"id":"Q016","question":"Which of these habits helps delay or prevent type 2 diabetes onset?","options":["Smoking tobacco","Maintaining a healthy body weight","Eating excess sugar","Avoiding all physical activity"],"correct_answer":"Maintaining a healthy body weight","explanation":"A healthy weight, physical activity, and a balanced diet help prevent type 2 diabetes."},
+        {"id":"Q017","question":"Which beverage choice is recommended over sugar-sweetened drinks for diabetes prevention?","options":["Soda","Fruit juice","Water","Energy drinks"],"correct_answer":"Water","explanation":"IDF recommends choosing water, coffee, or tea instead of sugar-sweetened beverages."},
+        {"id":"Q018","question":"How many servings of vegetables are recommended daily for diabetes prevention?","options":["At least 1","At least 3","At least 10","None specifically"],"correct_answer":"At least 3","explanation":"IDF recommends eating at least three servings of vegetables daily, including leafy greens."},
+        {"id":"Q019","question":"Which type of fat should replace saturated fats to support metabolic health?","options":["Trans fats","Unsaturated fats (olive oil, canola oil)","No replacement is needed","Butter and ghee"],"correct_answer":"Unsaturated fats (olive oil, canola oil)","explanation":"Unsaturated fats like olive, canola, and sunflower oil are healthier alternatives to saturated fats."},
+        {"id":"Q020","question":"What is a key recommended regular test for people managing diabetes?","options":["Eye color check","Blood glucose and glycated hemoglobin testing","Height measurement","Hearing test"],"correct_answer":"Blood glucose and glycated hemoglobin testing","explanation":"Regular blood glucose and HbA1c testing helps monitor and manage diabetes."},
+        {"id":"Q021","question":"Which grain choice supports better blood sugar management?","options":["White bread","Whole-grain bread","Sugary cereal","Refined pasta"],"correct_answer":"Whole-grain bread","explanation":"Whole grains are recommended over refined/white grain products for metabolic health."},
+        {"id":"Q022","question":"Limiting alcohol intake to how many standard drinks per day is recommended for diabetes prevention?","options":["No limit","A maximum of two","At least five","Ten or more"],"correct_answer":"A maximum of two","explanation":"IDF recommends limiting alcohol to a maximum of two standard drinks per day."},
+        {"id":"Q023","question":"Which food choice is recommended over red or processed meat for better metabolic health?","options":["Lean poultry, white meat, or seafood","More bacon","Extra processed sausages","Fried red meat"],"correct_answer":"Lean poultry, white meat, or seafood","explanation":"IDF recommends choosing lean cuts of white meat, poultry, or seafood instead of red or processed meat."}
+      ]
+    },
+    "liver_hepatitis": {
+      "title": "Liver Health & Hepatitis",
+      "patient_niche": "hepatitis A/B/C/D/E, liver disease, cirrhosis risk",
+      "source": "WHO Hepatitis Fact Sheets (A, B, C, D, E)",
+      "questions": [
+        {"id":"Q024","question":"How many main types of hepatitis viruses are there?","options":["2","3","5","8"],"correct_answer":"5","explanation":"There are 5 main hepatitis virus types: A, B, C, D, and E."},
+        {"id":"Q025","question":"Which hepatitis viruses have a safe and effective vaccine available?","options":["A and B","C and D","Only E","None"],"correct_answer":"A and B","explanation":"Safe, effective vaccines exist for hepatitis A and B; there is currently no vaccine for hepatitis C."},
+        {"id":"Q026","question":"How is hepatitis A primarily transmitted?","options":["Through blood transfusion only","Through contaminated food and water (fecal-oral route)","Through mosquito bites","Through air"],"correct_answer":"Through contaminated food and water (fecal-oral route)","explanation":"Hepatitis A spreads via fecal-oral contamination, linked to unsafe water and poor sanitation."},
+        {"id":"Q027","question":"When should the hepatitis B vaccine ideally be given to a newborn?","options":["At age 5","Within 24 hours of birth","Only if the mother requests it","At age 18"],"correct_answer":"Within 24 hours of birth","explanation":"The hepatitis B birth dose within 24 hours significantly reduces mother-to-child transmission risk."},
+        {"id":"Q028","question":"Approximately how many people worldwide live with chronic hepatitis B or C infection?","options":["10 million","50 million","325 million","1 billion"],"correct_answer":"325 million","explanation":"WHO estimates 325 million people live with chronic hepatitis B or C infection worldwide."},
+        {"id":"Q029","question":"What is a key prevention method against hepatitis B and C transmission?","options":["Sharing needles","Using sterile injection equipment","Avoiding water","Skipping vaccination"],"correct_answer":"Using sterile injection equipment","explanation":"Sterile injection equipment and screened blood transfusions prevent hepatitis B and C transmission."},
+        {"id":"Q030","question":"Hepatitis C is best prevented by avoiding contact with what?","options":["Contaminated food","Infected blood","Sunlight","Cold air"],"correct_answer":"Infected blood","explanation":"Since there's no hepatitis C vaccine, avoiding contact with infected blood is the primary prevention method."},
+        {"id":"Q031","question":"What long-term complications can chronic hepatitis B or C cause in the liver?","options":["Improved liver function","Cirrhosis and liver cancer","No effect on the liver","Only mild fatigue"],"correct_answer":"Cirrhosis and liver cancer","explanation":"Chronic hepatitis B/C infection can progress to cirrhosis and liver cancer if untreated."},
+        {"id":"Q032","question":"Hepatitis E is mainly transmitted through which route?","options":["Airborne droplets","Contaminated water","Skin contact","Genetic inheritance"],"correct_answer":"Contaminated water","explanation":"Hepatitis E spreads primarily via the fecal-oral route, largely through contaminated water."},
+        {"id":"Q033","question":"Which practice helps prevent hepatitis D infection?","options":["Hepatitis D has no relation to other hepatitis types","Getting the hepatitis B vaccine","Avoiding fruits","Drinking more coffee"],"correct_answer":"Getting the hepatitis B vaccine","explanation":"Hepatitis D only infects people already infected with hepatitis B, so the HBV vaccine prevents it."}
+      ]
+    },
+    "kidney_health": {
+      "title": "Kidney Health",
+      "patient_niche": "chronic kidney disease, dialysis patients, diabetic nephropathy risk",
+      "source": "WHO Kidney Disease Fact Sheet",
+      "questions": [
+        {"id":"Q034","question":"Which lifestyle factor helps reduce the risk of developing chronic kidney disease (CKD)?","options":["Regular physical activity and healthy body weight","Smoking regularly","High salt diet","Avoiding all water intake"],"correct_answer":"Regular physical activity and healthy body weight","explanation":"A healthy lifestyle including physical activity, healthy weight, and no tobacco use reduces CKD risk."},
+        {"id":"Q035","question":"Which existing conditions increase the risk of chronic kidney disease if poorly controlled?","options":["Common cold","Diabetes, hypertension, and cardiovascular disease","Seasonal allergies","Mild headaches"],"correct_answer":"Diabetes, hypertension, and cardiovascular disease","explanation":"Good control of blood pressure, glucose, and lipids in these conditions helps reduce CKD risk."},
+        {"id":"Q036","question":"What can help further reduce kidney disease risk in people with diabetes?","options":["Ignoring blood sugar levels","Good control of blood pressure, glucose, and lipids","Eating more sugar","Avoiding all medication"],"correct_answer":"Good control of blood pressure, glucose, and lipids","explanation":"Controlling these three factors alongside lifestyle measures reduces CKD progression risk."},
+        {"id":"Q037","question":"Which of these habits does NOT help reduce chronic kidney disease risk?","options":["Regular physical activity","Tobacco use","Maintaining a healthy body weight","Managing blood pressure"],"correct_answer":"Tobacco use","explanation":"Refraining from tobacco use, not using it, is what helps reduce CKD risk."},
+        {"id":"Q038","question":"Why is blood pressure control especially important for kidney health?","options":["It has no connection to kidney function","Uncontrolled high blood pressure can damage the kidneys over time","It only affects the heart","Blood pressure and kidneys are unrelated organs"],"correct_answer":"Uncontrolled high blood pressure can damage the kidneys over time","explanation":"Hypertension is a major risk factor for chronic kidney disease progression, so blood pressure control helps protect kidney function."}
+      ]
+    },
+    "skin_uv_protection": {
+      "title": "Skin Health & Sun Protection",
+      "patient_niche": "skin cancer risk, dermatology patients, outdoor workers",
+      "source": "WHO Ultraviolet Radiation Fact Sheet, IARC European Code Against Cancer",
+      "questions": [
+        {"id":"Q039","question":"What is the primary cause of most skin cancers?","options":["Cold weather","Ultraviolet radiation (UV) exposure","Eating spicy food","Lack of sleep"],"correct_answer":"Ultraviolet radiation (UV) exposure","explanation":"Skin cancers are primarily caused by UV radiation from the sun or artificial sources like sunbeds."},
+        {"id":"Q040","question":"At what UV index level is sun protection recommended?","options":["UV index of 1 and above","UV index of 3 and above","UV index of 8 and above","Only above UV index 10"],"correct_answer":"UV index of 3 and above","explanation":"WHO recommends sun protection when the UV index reaches 3 or higher."},
+        {"id":"Q041","question":"What percentage of skin cancer cases could be prevented with proper sun protection?","options":["10%","25%","50%","Up to 80% (4 out of 5 cases)"],"correct_answer":"Up to 80% (4 out of 5 cases)","explanation":"Experts estimate 4 out of 5 skin cancer cases could be prevented through sun protection."},
+        {"id":"Q042","question":"What is the recommended minimum SPF for sunscreen during everyday activities?","options":["SPF 5","SPF 15","SPF 50 only","No SPF needed"],"correct_answer":"SPF 15","explanation":"WHO/IARC recommend at least SPF 15 for daily activities and SPF 30+ during prolonged sun exposure."},
+        {"id":"Q043","question":"When are the sun's UV rays typically strongest during the day?","options":["Early morning","Two hours before to two hours after solar noon","Late evening","At night"],"correct_answer":"Two hours before to two hours after solar noon","explanation":"UV intensity peaks around midday, so limiting exposure during this window reduces risk."},
+        {"id":"Q044","question":"Which of these is NOT an effective sun protection measure?","options":["Seeking shade","Wearing a broad-brimmed hat","Using artificial tanning beds for vitamin D","Wearing protective clothing"],"correct_answer":"Using artificial tanning beds for vitamin D","explanation":"Sunbeds increase skin cancer risk and should never be used as a vitamin D source."},
+        {"id":"Q045","question":"How often should sunscreen be reapplied during outdoor activity?","options":["Once in the morning only","Every two hours, especially after sweating or swimming","Once a week","Only if it rains"],"correct_answer":"Every two hours, especially after sweating or swimming","explanation":"Sunscreen should be reapplied every two hours and after sweating, swimming, or towel-drying."},
+        {"id":"Q046","question":"Should sunscreen be used to extend time spent in the sun?","options":["Yes, it makes sun exposure completely safe","No, it should not be used to justify longer sun exposure","Yes, but only in winter","It has no effect either way"],"correct_answer":"No, it should not be used to justify longer sun exposure","explanation":"WHO states sunscreens should not be used to extend sun exposure time, as they cannot completely block UV radiation."},
+        {"id":"Q047","question":"Which population is particularly vulnerable to sun damage requiring extra protection?","options":["Adults over 60 only","Children","People who never go outside","None, risk is equal for all ages"],"correct_answer":"Children","explanation":"Children are especially vulnerable to UV damage, which contributes to skin cancer risk later in life."},
+        {"id":"Q048","question":"Why are wraparound-style sunglasses recommended for sun protection?","options":["They look fashionable only","They provide 99-100% UV-A and UV-B protection for the eyes","They have no protective function","They are required by law everywhere"],"correct_answer":"They provide 99-100% UV-A and UV-B protection for the eyes","explanation":"WHO recommends wraparound sunglasses that block 99-100% of UV-A and UV-B rays to protect the eyes."}
+      ]
+    },
+    "obesity_nutrition": {
+      "title": "Obesity, Weight & Nutrition",
+      "patient_niche": "overweight/obesity management, general wellness, weight-loss programs",
+      "source": "WHO Obesity and Healthy Diet Fact Sheets",
+      "questions": [
+        {"id":"Q049","question":"What BMI range does WHO consider healthy for adults?","options":["15–18","18.5–25","30–35","35–40"],"correct_answer":"18.5–25","explanation":"WHO recommends a BMI between 18.5 and 25 as a healthy range for adults."},
+        {"id":"Q050","question":"How many grams of fruits and vegetables does WHO recommend eating daily?","options":["100g","200g","400g (5 portions)","1000g"],"correct_answer":"400g (5 portions)","explanation":"WHO recommends at least 400g, or 5 portions, of fruits and vegetables daily."},
+        {"id":"Q051","question":"What percentage of daily energy intake should come from free sugars at most?","options":["Less than 10%, ideally less than 5%","Up to 50%","Up to 30%","There is no recommended limit"],"correct_answer":"Less than 10%, ideally less than 5%","explanation":"WHO recommends limiting free sugar intake to under 10% of daily energy, ideally under 5%."},
+        {"id":"Q052","question":"What is the recommended daily salt intake limit according to WHO?","options":["Less than 5 grams","20 grams","No limit","50 grams"],"correct_answer":"Less than 5 grams","explanation":"WHO recommends limiting salt intake to less than 5 grams per day."},
+        {"id":"Q053","question":"Which type of fat should be limited to less than 1% of daily energy intake?","options":["Unsaturated fat","Trans fat","Omega-3 fatty acids","Fiber"],"correct_answer":"Trans fat","explanation":"WHO recommends limiting trans fat intake to less than 1% of total daily energy."},
+        {"id":"Q054","question":"How many people die each year globally due to being overweight or obese?","options":["100,000","500,000","At least 2.8 million","10 million"],"correct_answer":"At least 2.8 million","explanation":"Obesity and overweight contribute to at least 2.8 million deaths annually worldwide."},
+        {"id":"Q055","question":"What defines obesity in terms of BMI?","options":["BMI over 18.5","BMI over 25","BMI over 30","BMI under 15"],"correct_answer":"BMI over 30","explanation":"A BMI over 25 is overweight; a BMI over 30 is classified as obese."},
+        {"id":"Q056","question":"Which food choice supports weight management?","options":["Nuts, whole grains, and legumes","Sugar-sweetened beverages","Deep-fried snacks","Processed red meat"],"correct_answer":"Nuts, whole grains, and legumes","explanation":"Increasing intake of nuts, whole grains, legumes, fruits, and vegetables supports healthy weight."},
+        {"id":"Q057","question":"How much daily physical activity is recommended for children to prevent obesity?","options":["10 minutes","30 minutes","60 minutes","No activity needed"],"correct_answer":"60 minutes","explanation":"WHO recommends 60 minutes of moderate-to-vigorous physical activity daily for children."},
+        {"id":"Q058","question":"Which infant feeding practice is recommended to help prevent childhood obesity?","options":["Exclusive breastfeeding for the first 6 months","Formula feeding only","Introducing solid foods at 1 month","Skipping meals"],"correct_answer":"Exclusive breastfeeding for the first 6 months","explanation":"Exclusive breastfeeding for 6 months, continued to 24 months, supports healthy weight development."},
+        {"id":"Q059","question":"How does regular physical activity combined with a healthy diet help with weight management?","options":["It has no combined effect","It helps balance calories consumed and burned, supporting healthy weight","It only works for children","Diet and exercise work against each other"],"correct_answer":"It helps balance calories consumed and burned, supporting healthy weight","explanation":"WHO notes that regular physical activity together with a healthy diet is key to maintaining a healthy body weight."},
+        {"id":"Q060","question":"Which snack choice is a healthier alternative to sugary or fried snacks?","options":["Fresh fruit or unsweetened yoghurt","Extra fried chips","More soda","Candy bars"],"correct_answer":"Fresh fruit or unsweetened yoghurt","explanation":"IDF recommends nuts, fresh fruit, or unsweetened yoghurt as healthier snack alternatives."}
+      ]
+    },
+    "mental_health": {
+      "title": "Mental Health & Wellbeing",
+      "patient_niche": "depression, anxiety, stress management, general mental wellness",
+      "source": "WHO Mental Disorders Fact Sheet",
+      "questions": [
+        {"id":"Q061","question":"What percentage of the global burden of disease is made up by mental, neurological, and substance use disorders?","options":["1%","10%","50%","90%"],"correct_answer":"10%","explanation":"These disorders make up 10% of the global burden of disease and 30% of non-fatal disease burden."},
+        {"id":"Q062","question":"How much does depression and anxiety cost the global economy in lost productivity each year?","options":["$1 million","$1 billion","About $1 trillion","$1 quadrillion"],"correct_answer":"About $1 trillion","explanation":"The global economy loses roughly US$1 trillion per year in productivity due to depression and anxiety."},
+        {"id":"Q063","question":"Approximately how many people worldwide were living with depression in 2023?","options":["10 million","50 million","322 million","1 billion"],"correct_answer":"322 million","explanation":"WHO estimated 322 million people were living with depression in 2023, including 43 million children and adolescents."},
+        {"id":"Q064","question":"Which of these is a recognized category of mental disorder?","options":["Anxiety disorder","Common cold","Broken bone","Sunburn"],"correct_answer":"Anxiety disorder","explanation":"Anxiety disorders, depression, bipolar disorder, and PTSD are among WHO-recognized mental disorders."},
+        {"id":"Q065","question":"Which factor contributes to the global burden of mental disorders?","options":["Untreated anxiety and depression","Regular exercise","Adequate sleep","Balanced nutrition"],"correct_answer":"Untreated anxiety and depression","explanation":"Depression and anxiety disorders are major contributors to the global disease burden and lost productivity."},
+        {"id":"Q066","question":"Approximately how many children and adolescents were living with depression in 2023?","options":["1 million","43 million","500 million","2 billion"],"correct_answer":"43 million","explanation":"Of the 322 million people living with depression in 2023, 43 million were children and adolescents."}
+      ]
+    },
+    "physical_activity_sports": {
+      "title": "Physical Activity & Sports",
+      "patient_niche": "sports medicine, rehabilitation, general fitness, chronic disease management",
+      "source": "WHO Guidelines on Physical Activity and Sedentary Behaviour",
+      "questions": [
+        {"id":"Q067","question":"How many minutes of moderate-intensity aerobic activity per week does WHO recommend for adults?","options":["30–60 minutes","150–300 minutes","500–600 minutes","No specific amount"],"correct_answer":"150–300 minutes","explanation":"WHO recommends 150–300 minutes of moderate-intensity aerobic activity weekly for substantial health benefits."},
+        {"id":"Q068","question":"How many days per week should adults do muscle-strengthening activities?","options":["Never","At least 2 days","Every single day only","Once a month"],"correct_answer":"At least 2 days","explanation":"WHO recommends muscle-strengthening activities involving major muscle groups on 2 or more days weekly."},
+        {"id":"Q069","question":"What is the minimum duration recommended for a single bout of aerobic activity?","options":["1 minute","10 minutes","60 minutes","No minimum needed"],"correct_answer":"10 minutes","explanation":"Aerobic activity should ideally be performed in bouts of at least 10 minutes."},
+        {"id":"Q070","question":"Is physical activity still beneficial for people with chronic conditions or disabilities?","options":["No, they should avoid all activity","Yes, with guidance suited to their condition","Only if they are fully cured first","Physical activity has no benefit for them"],"correct_answer":"Yes, with guidance suited to their condition","explanation":"WHO guidelines include specific recommendations for people with chronic conditions and disabilities, emphasizing that some activity is better than none."},
+        {"id":"Q071","question":"What is the WHO's key message about physical activity amounts?","options":["Only intense exercise counts","Some physical activity is better than none","You must exercise for hours to benefit","Physical activity is optional for health"],"correct_answer":"Some physical activity is better than none","explanation":"WHO guidelines emphasize that all physical activity counts and any amount is better than none."},
+        {"id":"Q072","question":"How much moderate-to-vigorous physical activity is recommended daily for children and adolescents?","options":["10 minutes","60 minutes","3 hours","No activity needed"],"correct_answer":"60 minutes","explanation":"WHO recommends an average of 60 minutes of moderate-to-vigorous activity daily for children and adolescents."},
+        {"id":"Q073","question":"Which behaviour should be limited across all age groups according to WHO physical activity guidance?","options":["Drinking water","Sedentary (sitting) behaviour","Sleeping at night","Walking"],"correct_answer":"Sedentary (sitting) behaviour","explanation":"WHO guidelines recommend limiting sedentary time across all age groups and abilities."},
+        {"id":"Q074","question":"For additional health benefits beyond the base recommendation, how many minutes of moderate activity can adults aim for weekly?","options":["Under 50 minutes","Over 300 minutes","Exactly 20 minutes","Physical activity has a fixed cap"],"correct_answer":"Over 300 minutes","explanation":"For extra benefits, adults may increase moderate-intensity activity beyond 300 minutes weekly, when appropriate."},
+        {"id":"Q075","question":"Why is muscle-strengthening activity important in addition to aerobic exercise?","options":["It provides additional health benefits beyond aerobic activity alone","It replaces the need for aerobic activity entirely","It has no proven benefit","It is only necessary for athletes"],"correct_answer":"It provides additional health benefits beyond aerobic activity alone","explanation":"WHO recommends muscle-strengthening activities on 2+ days weekly as they provide additional health benefits beyond aerobic exercise."}
+      ]
+    },
+    "tobacco_respiratory": {
+      "title": "Tobacco Use & Respiratory Health",
+      "patient_niche": "COPD, asthma, smokers, lung disease",
+      "source": "WHO Tobacco Fact Sheet",
+      "questions": [
+        {"id":"Q076","question":"How many organs does tobacco use damage in the body?","options":["Only the lungs","Only the heart","Nearly every organ","None significantly"],"correct_answer":"Nearly every organ","explanation":"Tobacco damages nearly every organ, causing cancer, heart disease, stroke, lung disease, and more."},
+        {"id":"Q077","question":"What chronic respiratory disease is tobacco smoking the leading cause of?","options":["Common cold","Chronic obstructive pulmonary disease (COPD)","Seasonal allergies","Hiccups"],"correct_answer":"Chronic obstructive pulmonary disease (COPD)","explanation":"Tobacco smoking is the leading cause of COPD, causing painful cough and breathing difficulties."},
+        {"id":"Q078","question":"Roughly how many chemicals does tobacco smoke contain, with at least 69 known to cause cancer?","options":["10","100","7,000","1 million"],"correct_answer":"7,000","explanation":"Tobacco smoke contains over 7,000 chemicals, at least 69 of which are known carcinogens."},
+        {"id":"Q079","question":"How many deaths globally are caused by second-hand smoke exposure each year?","options":["1,000","10,000","Over 1 million","1 billion"],"correct_answer":"Over 1 million","explanation":"Over 1 million deaths globally each year are caused by exposure to second-hand smoke."},
+        {"id":"Q080","question":"What happens to respiratory health improvement after a person quits smoking?","options":["No improvement ever occurs","Significant improvement and fewer hospitalizations","Health gets worse immediately","Only cosmetic changes occur"],"correct_answer":"Significant improvement and fewer hospitalizations","explanation":"Quitting smoking leads to significant respiratory improvement and reduced hospitalization frequency."},
+        {"id":"Q081","question":"What percentage of lung cancer deaths globally are attributed to tobacco smoking?","options":["Less than 10%","About 30%","Over two-thirds","0%"],"correct_answer":"Over two-thirds","explanation":"Tobacco smoking is responsible for over two-thirds of lung cancer deaths globally."}
+      ]
+    },
+    "hydration_general_wellness": {
+      "title": "Hydration & General Wellness",
+      "patient_niche": "general wellness, kidney patients, all-purpose daily habits",
+      "source": "WHO/general clinical guidance",
+      "questions": [
+        {"id":"Q082","question":"Why is adequate hydration important for kidney health?","options":["It has no relation to kidney function","It helps kidneys filter waste effectively","It weakens the kidneys","It only affects skin"],"correct_answer":"It helps kidneys filter waste effectively","explanation":"Proper hydration supports healthy kidney function and waste filtration."},
+        {"id":"Q083","question":"Which drink choice is preferable for daily hydration over sugary beverages?","options":["Soda","Energy drinks","Water","Sweetened fruit juice"],"correct_answer":"Water","explanation":"Water is the healthiest primary choice for daily hydration, avoiding added sugars."},
+        {"id":"Q084","question":"What is a simple daily habit that supports overall wellness and hydration?","options":["Skipping water intake","Choosing water over sugary drinks throughout the day","Only drinking coffee","Avoiding fluids before exercise"],"correct_answer":"Choosing water over sugary drinks throughout the day","explanation":"Prioritizing water over sugar-sweetened beverages supports hydration, dental health, and weight management."}
+      ]
+    },
+    "eye_vision_health": {
+      "title": "Eye & Vision Health",
+      "patient_niche": "diabetic retinopathy, cataract patients, elderly vision care",
+      "source": "WHO Blindness and Visual Impairment Fact Sheet",
+      "questions": [
+        {"id":"Q085","question":"What are the two leading causes of vision impairment and blindness globally?","options":["Refractive errors and cataracts","Sunburn and dry skin","Ear infections and hearing loss","Broken bones and fractures"],"correct_answer":"Refractive errors and cataracts","explanation":"Globally, uncorrected refractive errors and unoperated cataracts are the leading causes of vision impairment."},
+        {"id":"Q086","question":"Approximately how many people worldwide have a near or distance vision impairment?","options":["10 million","100 million","2.2 billion","10 billion"],"correct_answer":"2.2 billion","explanation":"WHO estimates at least 2.2 billion people globally have vision impairment."},
+        {"id":"Q087","question":"What proportion of global vision impairment cases could have been prevented or is yet to be addressed?","options":["1 in 100","1 in 10","Almost half (1 billion of 2.2 billion)","None of them"],"correct_answer":"Almost half (1 billion of 2.2 billion)","explanation":"At least 1 billion of the 2.2 billion vision impairment cases could have been prevented or addressed."},
+        {"id":"Q088","question":"Which age group is most commonly affected by vision impairment and blindness?","options":["Children under 5","Teenagers","Adults over 50 years","There is no age pattern"],"correct_answer":"Adults over 50 years","explanation":"Most people with vision impairment and blindness are over the age of 50."},
+        {"id":"Q089","question":"Which systemic diseases can also contribute to eye conditions if poorly managed?","options":["Common cold and flu","Diabetes and hypertension","Seasonal allergies","Mild headaches"],"correct_answer":"Diabetes and hypertension","explanation":"Managing diabetes and hypertension effectively helps reduce the risk of related ocular diseases like diabetic retinopathy."},
+        {"id":"Q090","question":"What is recommended to detect and manage most eye conditions early?","options":["Avoiding all eye exams","Regular eye examinations","Wearing sunglasses only","Ignoring blurry vision"],"correct_answer":"Regular eye examinations","explanation":"Early detection and timely management can prevent the majority of vision impairment and blindness cases."}
+      ]
+    },
+    "oral_dental_health": {
+      "title": "Oral & Dental Health",
+      "patient_niche": "dental patients, pediatric oral care, pregnancy oral health",
+      "source": "WHO Oral Health Fact Sheet, WHO Sugars and Dental Caries",
+      "questions": [
+        {"id":"Q091","question":"How often should you brush your teeth with fluoride toothpaste according to WHO?","options":["Once a week","Once daily","Twice daily","Only when they hurt"],"correct_answer":"Twice daily","explanation":"WHO recommends twice-daily tooth brushing with fluoride toothpaste (1000-1500 ppm)."},
+        {"id":"Q092","question":"What is the most common noncommunicable disease worldwide?","options":["Diabetes","Dental caries (tooth decay)","Heart disease","Cancer"],"correct_answer":"Dental caries (tooth decay)","explanation":"Dental caries affects an estimated 2.5 billion people, making it the most common NCD globally."},
+        {"id":"Q093","question":"What dietary factor is the most common risk factor for dental caries?","options":["Protein intake","Free sugar consumption","Drinking water","Eating vegetables"],"correct_answer":"Free sugar consumption","explanation":"Consumption of free sugars in foods and drinks is the most common risk factor for dental caries."},
+        {"id":"Q094","question":"Should children under 2 years of age consume sugar-sweetened beverages?","options":["Yes, in moderation","No, WHO recommends avoiding them entirely","Only on special occasions","There is no guidance on this"],"correct_answer":"No, WHO recommends avoiding them entirely","explanation":"WHO recommends that children under 2 should not consume any sugar-sweetened beverages."},
+        {"id":"Q095","question":"Which practice helps prevent oral cancer and gum disease?","options":["Chewing tobacco","Stopping all forms of tobacco use","Increasing alcohol consumption","Avoiding dental checkups"],"correct_answer":"Stopping all forms of tobacco use","explanation":"Stopping tobacco use, including chewing, significantly reduces oral cancer and gum disease risk."},
+        {"id":"Q096","question":"What is recommended to protect teeth during contact sports?","options":["Nothing is needed","A mouth guard","Extra sugar intake","Avoiding sports entirely"],"correct_answer":"A mouth guard","explanation":"Wearing protective gear like a mouth guard during contact sports reduces the risk of facial and dental injuries."}
+      ]
+    },
+    "hand_hygiene_infection_prevention": {
+      "title": "Hand Hygiene & Infection Prevention",
+      "patient_niche": "post-surgical patients, hospital-acquired infection risk, general infection control",
+      "source": "WHO Hand Hygiene Guidelines",
+      "questions": [
+        {"id":"Q097","question":"What is described as the most important measure to prevent the spread of harmful germs in healthcare settings?","options":["Wearing sunglasses","Hand hygiene","Eating more vegetables","Sleeping more"],"correct_answer":"Hand hygiene","explanation":"Hand hygiene is the most important measure to avoid transmission of harmful germs and prevent healthcare-associated infections."},
+        {"id":"Q098","question":"When should you wash hands with soap and water instead of using alcohol-based hand rub?","options":["When hands are visibly dirty or soiled","Never, alcohol rub is always better","Only in winter","Only before meals"],"correct_answer":"When hands are visibly dirty or soiled","explanation":"Soap and water should be used when hands are visibly dirty, soiled with body fluids, or after using the toilet."},
+        {"id":"Q099","question":"By how much can good infection prevention and control, including hand hygiene, reduce healthcare-associated infections?","options":["Up to 10%","Up to 70%","No measurable effect","Up to 5%"],"correct_answer":"Up to 70%","explanation":"Effective infection prevention and control measures, including hand hygiene, can prevent up to 70% of healthcare-associated infections."},
+        {"id":"Q100","question":"How much can proper hand hygiene reduce diarrhoeal disease in community settings?","options":["No effect","About 30%","100%","5%"],"correct_answer":"About 30%","explanation":"WHO/UNICEF guidelines note that hand hygiene reduces diarrhoeal disease by about 30% in community settings."},
+        {"id":"Q101","question":"Which of these is one of the five key times WHO recommends practicing hand hygiene?","options":["After using the toilet","Only before sleeping","Once a day regardless of activity","Only after exercise"],"correct_answer":"After using the toilet","explanation":"Key times include before preparing food, before eating, after using the toilet, and after coughing or sneezing."}
+      ]
+    },
+    "cancer_prevention": {
+      "title": "Cancer Prevention & Screening",
+      "patient_niche": "cancer risk screening, oncology prevention counseling",
+      "source": "WHO Cancer Fact Sheet",
+      "questions": [
+        {"id":"Q102","question":"What percentage of cancer cases are estimated to be preventable?","options":["Less than 5%","Between 30% and 50%","90%","100%"],"correct_answer":"Between 30% and 50%","explanation":"WHO estimates 30-50% of cancer deaths could be prevented by modifying or avoiding key risk factors."},
+        {"id":"Q103","question":"What is the single greatest avoidable risk factor for cancer mortality?","options":["Tobacco use","Drinking water","Reading in low light","Cold weather"],"correct_answer":"Tobacco use","explanation":"Tobacco use is the single greatest avoidable risk factor for cancer, killing over 8 million people each year."},
+        {"id":"Q104","question":"Which vaccines can help reduce the risk of liver and cervical cancer respectively?","options":["Flu and tetanus vaccines","Hepatitis B and HPV vaccines","Measles and mumps vaccines","There are no such vaccines"],"correct_answer":"Hepatitis B and HPV vaccines","explanation":"Hepatitis B vaccination reduces liver cancer risk; HPV vaccination reduces cervical cancer risk."},
+        {"id":"Q105","question":"Which types of cancer are linked to overweight and obesity?","options":["None are linked","Oesophagus, colorectal, breast, and kidney cancers","Only skin cancer","Only lung cancer"],"correct_answer":"Oesophagus, colorectal, breast, and kidney cancers","explanation":"Overweight and obesity are linked to multiple cancer types including oesophagus, colorectal, breast, endometrial, and kidney cancers."},
+        {"id":"Q106","question":"What can regular cancer screening help achieve?","options":["Guarantee immunity from cancer","Identify abnormalities early for prompt treatment","Replace the need for a healthy lifestyle","Cure all existing cancers instantly"],"correct_answer":"Identify abnormalities early for prompt treatment","explanation":"Screening aims to identify pre-cancer or early cancer signs before symptoms develop, enabling prompt treatment."},
+        {"id":"Q107","question":"Which practice helps reduce cancer risk related to sun exposure?","options":["Using sun protection measures","Avoiding all vegetables","Increasing red meat intake","Sleeping less"],"correct_answer":"Using sun protection measures","explanation":"Avoiding excess UV radiation exposure and using sun protection reduces skin cancer risk."}
+      ]
+    },
+    "vaccination_immunization": {
+      "title": "Vaccination & Immunization",
+      "patient_niche": "pediatric patients, immunization counseling, travel health",
+      "source": "WHO Immunization Fact Sheets",
+      "questions": [
+        {"id":"Q108","question":"How many lives has global immunization saved over the past 50 years, according to a major study?","options":["1 million","15 million","At least 154 million","1 billion"],"correct_answer":"At least 154 million","explanation":"A landmark study found immunization saved an estimated 154 million lives over 50 years, equal to 6 lives every minute."},
+        {"id":"Q109","question":"Which vaccine had the most significant impact on reducing infant mortality among those studied?","options":["Flu vaccine","Measles vaccine","Rabies vaccine","Yellow fever vaccine"],"correct_answer":"Measles vaccine","explanation":"The measles vaccine accounted for 60% of the lives saved due to immunization over the past 50 years."},
+        {"id":"Q110","question":"How many deaths does immunization currently prevent every year worldwide?","options":["10,000 to 50,000","3.5 million to 5 million","100 million","1,000"],"correct_answer":"3.5 million to 5 million","explanation":"Immunization currently prevents 3.5 to 5 million deaths annually from diseases like diphtheria, tetanus, and measles."},
+        {"id":"Q111","question":"Vaccines are currently available to prevent how many life-threatening diseases and infections?","options":["5","More than 30","1,000","None"],"correct_answer":"More than 30","explanation":"We now have vaccines to prevent more than 30 life-threatening diseases and infections."},
+        {"id":"Q112","question":"What is a 'zero-dose child' in immunization terminology?","options":["A fully vaccinated child","A child who has missed all vaccinations","A child who received extra doses","A term with no specific meaning"],"correct_answer":"A child who has missed all vaccinations","explanation":"Zero-dose children are those missing out on any vaccination; 13.5 million such children existed globally in 2025."}
+      ]
+    },
+    "antimicrobial_resistance_medication_safety": {
+      "title": "Antibiotic & Medication Safety",
+      "patient_niche": "medication adherence programs, antibiotic prescription patients",
+      "source": "WHO Antimicrobial Resistance Fact Sheet",
+      "questions": [
+        {"id":"Q113","question":"What is antimicrobial resistance (AMR)?","options":["When medicines become more effective over time","When bacteria, viruses, fungi, or parasites no longer respond to medicines","A vitamin deficiency","A type of vaccine"],"correct_answer":"When bacteria, viruses, fungi, or parasites no longer respond to medicines","explanation":"AMR occurs when microorganisms change over time and no longer respond to antimicrobial medicines."},
+        {"id":"Q114","question":"What is one of the main drivers of antimicrobial resistance?","options":["Drinking enough water","Misuse and overuse of antibiotics","Regular exercise","Eating vegetables"],"correct_answer":"Misuse and overuse of antibiotics","explanation":"Misuse and overuse of antimicrobials are the main drivers behind the development of drug-resistant pathogens."},
+        {"id":"Q115","question":"Should antibiotics be used to treat viral infections like the common cold?","options":["Yes, always","No, unless a bacterial infection is also present","Only on weekends","Only for children"],"correct_answer":"No, unless a bacterial infection is also present","explanation":"Antibiotics should not be used for viral infections such as colds and flu unless a bacterial infection is also present."},
+        {"id":"Q116","question":"Approximately what fraction of laboratory-confirmed bacterial infections worldwide were resistant to antibiotics in 2023?","options":["1 in 100","1 in 6","1 in 2","All of them"],"correct_answer":"1 in 6","explanation":"Approximately 1 in 6 laboratory-confirmed bacterial infections worldwide were resistant to antibiotics in 2023."},
+        {"id":"Q117","question":"What is one recommended way to help control the spread of antimicrobial resistance?","options":["Taking antibiotics without a prescription","Following routine vaccination and evidence-based prescribing guidelines","Sharing leftover antibiotics with others","Stopping antibiotics early once symptoms improve slightly"],"correct_answer":"Following routine vaccination and evidence-based prescribing guidelines","explanation":"Strong infection prevention including vaccination and responsible antibiotic prescribing helps control AMR spread."}
+      ]
+    },
+    "stroke_awareness": {
+      "title": "Stroke Awareness & Prevention",
+      "patient_niche": "stroke risk, post-stroke rehabilitation, hypertension patients",
+      "source": "WHO Stroke Fact Sheet",
+      "questions": [
+        {"id":"Q118","question":"What was stroke's global ranking as a cause of death and disability in 2021?","options":["10th leading cause","5th leading cause","Third leading cause","Not a significant cause"],"correct_answer":"Third leading cause","explanation":"In 2021, stroke was the third leading cause of death and disability globally, with 93.8 million cases."},
+        {"id":"Q119","question":"What fraction of adults are predicted to experience a stroke in their lifetime?","options":["1 in 100","1 in 20","1 in 4","1 in 2"],"correct_answer":"1 in 4","explanation":"The lifetime risk of stroke has increased by 50% over 20 years, with 1 in 4 adults predicted to experience one."},
+        {"id":"Q120","question":"Which of these is a classic warning sign of stroke remembered by the acronym FAST?","options":["Fever, Appetite, Sweating, Thirst","Face drooping, Arm weakness, Speech difficulty, Time to call emergency services","Fatigue, Anxiety, Stomach pain, Tremors","Fainting, Aches, Sneezing, Tingling"],"correct_answer":"Face drooping, Arm weakness, Speech difficulty, Time to call emergency services","explanation":"Facial droop, arm weakness, and slurred speech are key stroke signs; acting fast by calling emergency services is critical."},
+        {"id":"Q121","question":"Which modifiable risk factor contributes most to the global stroke burden?","options":["Eye color","High blood pressure","Height","Blood type"],"correct_answer":"High blood pressure","explanation":"High blood pressure is among the top modifiable risk factors driving global stroke burden, along with smoking and poor diet."},
+        {"id":"Q122","question":"How much physical activity per week is recommended to help reduce stroke risk?","options":["No activity needed","At least 150 minutes of moderate-intensity exercise","30 minutes total per month","Only vigorous exercise counts"],"correct_answer":"At least 150 minutes of moderate-intensity exercise","explanation":"WHO recommends at least 150 minutes of moderate-intensity physical activity weekly to help reduce stroke risk."},
+        {"id":"Q123","question":"How many servings of fruits and vegetables daily are recommended to help reduce stroke risk?","options":["At least 1","At least 5","At least 20","None specifically"],"correct_answer":"At least 5","explanation":"WHO recommends at least five servings of fruit and vegetables daily as part of stroke risk reduction."}
+      ]
+    },
+    "anemia_blood_health": {
+      "title": "Anemia & Blood Health",
+      "patient_niche": "anemia, iron deficiency, pregnant women, menstrual health",
+      "source": "WHO Anaemia Fact Sheet",
+      "questions": [
+        {"id":"Q124","question":"What is the most common nutritional deficiency leading to anaemia?","options":["Vitamin C deficiency","Iron deficiency","Excess protein","Excess calcium"],"correct_answer":"Iron deficiency","explanation":"Iron deficiency, primarily due to inadequate dietary iron intake, is the most common nutritional cause of anaemia."},
+        {"id":"Q125","question":"Which of these is a common symptom of anaemia?","options":["Increased energy","Fatigue and shortness of breath","Improved concentration","Weight gain only"],"correct_answer":"Fatigue and shortness of breath","explanation":"Common anaemia symptoms include tiredness, dizziness, cold hands and feet, and shortness of breath on exertion."},
+        {"id":"Q126","question":"Which nutrient helps the body absorb iron better when eaten together with iron-rich foods?","options":["Vitamin C","Calcium","Caffeine","Tannins from tea"],"correct_answer":"Vitamin C","explanation":"Foods rich in vitamin C help the body absorb iron better, while tea, coffee, and calcium can inhibit absorption."},
+        {"id":"Q127","question":"Which foods are good sources of dietary iron?","options":["Lean red meat, fish, legumes, and dark green leafy vegetables","Only white bread","Only carbonated drinks","Only candy"],"correct_answer":"Lean red meat, fish, legumes, and dark green leafy vegetables","explanation":"Iron-rich foods include lean meats, fish, poultry, legumes like lentils and beans, and dark leafy greens."},
+        {"id":"Q128","question":"Which population groups are most commonly affected by anaemia?","options":["Only elderly men","Young children and pregnant women","Only teenagers","No group is more affected than another"],"correct_answer":"Young children and pregnant women","explanation":"Young children and pregnant women have the highest global prevalence of anaemia."},
+        {"id":"Q129","question":"What should you avoid consuming at the same time as iron supplements to ensure proper absorption?","options":["Vitamin C-rich foods","Calcium supplements and tea/coffee","Water","Fruits"],"correct_answer":"Calcium supplements and tea/coffee","explanation":"Calcium, tea, coffee, and cocoa can inhibit iron absorption, so they should be taken at different times than iron supplements."}
+      ]
+    },
+    "food_safety": {
+      "title": "Food Safety",
+      "patient_niche": "gastrointestinal patients, food handlers, general wellness, pediatric care",
+      "source": "WHO Food Safety Fact Sheet, WHO Five Keys to Safer Food",
+      "questions": [
+        {"id":"Q130","question":"Approximately how many people worldwide fall ill from contaminated food each year?","options":["1 million","10 million","866 million (almost 1 in 9 people)","5 billion"],"correct_answer":"866 million (almost 1 in 9 people)","explanation":"WHO estimates 866 million people, almost 1 in 9 globally, fall ill from contaminated food annually."},
+        {"id":"Q131","question":"Which age group experiences the highest risk of illness from unsafe food?","options":["Adults 30-40 years","Children under 5 years","Teenagers","Adults over 80 years only"],"correct_answer":"Children under 5 years","explanation":"Children under 5 face almost three times the risk of illness from unsafe food compared to older children and adults."},
+        {"id":"Q132","question":"What are WHO's 'Five Keys to Safer Food'?","options":["Keep clean, separate raw and cooked, cook thoroughly, keep food at safe temperatures, use safe water and raw materials","Only wash hands once a day","Only buy expensive food","Avoid eating vegetables"],"correct_answer":"Keep clean, separate raw and cooked, cook thoroughly, keep food at safe temperatures, use safe water and raw materials","explanation":"These five principles form WHO's core food safety guidance used in over 130 countries."},
+        {"id":"Q133","question":"What are the most common symptoms of foodborne illness?","options":["Headache and fatigue only","Stomach pain, vomiting, and diarrhoea","Skin rash","Joint pain"],"correct_answer":"Stomach pain, vomiting, and diarrhoea","explanation":"WHO identifies stomach pain, vomiting, and diarrhoea as the most common foodborne illness symptoms."},
+        {"id":"Q134","question":"To what minimum internal temperature should meat, poultry, and eggs be cooked to prevent foodborne illness?","options":["30°C","50°C","70°C","No specific temperature matters"],"correct_answer":"70°C","explanation":"Meat, poultry, eggs, and seafood should be cooked to a minimum internal temperature of 70°C to kill harmful pathogens."},
+        {"id":"Q135","question":"Why is it important to separate raw and cooked food during preparation?","options":["It has no real importance","To prevent cross-contamination of harmful bacteria","To save refrigerator space only","It only matters for restaurants"],"correct_answer":"To prevent cross-contamination of harmful bacteria","explanation":"Separating raw and cooked food prevents harmful bacteria from raw items contaminating ready-to-eat food."}
+      ]
+    },
+    "sleep_health": {
+      "title": "Sleep Health",
+      "patient_niche": "insomnia, general wellness, cardiometabolic risk, mental health patients",
+      "source": "CDC Sleep and Health Guidance",
+      "questions": [
+        {"id":"Q136","question":"How many hours of sleep are recommended for adults aged 18-60 for optimal health?","options":["4-5 hours","7 or more hours","10-12 hours","No specific amount matters"],"correct_answer":"7 or more hours","explanation":"CDC recommends adults aged 18-60 get 7 or more hours of sleep each night for optimal health."},
+        {"id":"Q137","question":"What health risks are associated with consistently sleeping less than 7 hours per night?","options":["No health risks at all","Increased risk of obesity, diabetes, and heart disease","Only minor tiredness","Improved memory"],"correct_answer":"Increased risk of obesity, diabetes, and heart disease","explanation":"Insufficient sleep is linked to increased risk of obesity, diabetes, hypertension, heart disease, and stroke."},
+        {"id":"Q138","question":"Approximately what percentage of US adults report getting insufficient sleep?","options":["Less than 5%","About 30%","90%","100%"],"correct_answer":"About 30%","explanation":"Roughly 30.5% of adults reported sleeping less than 7 hours on average in recent CDC data."},
+        {"id":"Q139","question":"Which of these is one of five key health behaviors identified for preventing chronic disease?","options":["Skipping meals regularly","Daily sufficient sleep (7+ hours)","Avoiding all physical activity","Sleeping less than 5 hours"],"correct_answer":"Daily sufficient sleep (7+ hours)","explanation":"CDC identifies sufficient sleep, alongside not smoking, physical activity, moderate alcohol use, and healthy weight, as key chronic-disease-prevention behaviors."}
+      ]
+    },
+    "maternal_child_nutrition": {
+      "title": "Maternal & Child Nutrition",
+      "patient_niche": "pregnant women, new mothers, pediatric nutrition, prenatal care",
+      "source": "WHO Nutrition Fact Sheet",
+      "questions": [
+        {"id":"Q140","question":"How long does WHO recommend exclusive breastfeeding for infants?","options":["2 weeks","6 months","3 years","Breastfeeding is not recommended"],"correct_answer":"6 months","explanation":"WHO recommends exclusive breastfeeding for the first six months of an infant's life."},
+        {"id":"Q141","question":"Up to what age does WHO recommend continuing breastfeeding alongside complementary foods?","options":["3 months","1 year","Up to two years or beyond","Breastfeeding should stop at 6 months"],"correct_answer":"Up to two years or beyond","explanation":"WHO recommends continued breastfeeding up to two years of age or beyond, alongside safe complementary foods introduced at 6 months."},
+        {"id":"Q142","question":"How many child deaths under age 5 could increased breastfeeding potentially prevent?","options":["1,000","823,000","10 million","No measurable impact"],"correct_answer":"823,000","explanation":"WHO estimates that increased breastfeeding could prevent 823,000 deaths in children under 5 annually."},
+        {"id":"Q143","question":"What health risk does maternal undernutrition during pregnancy create?","options":["No risk to the pregnancy","Poor fetal development and higher risk of complications","Only affects the mother's skin","Guarantees a healthy pregnancy"],"correct_answer":"Poor fetal development and higher risk of complications","explanation":"Maternal undernutrition leads to poor fetal development and increases pregnancy complication risks."},
+        {"id":"Q144","question":"Besides reducing infant mortality, what cancer risk does breastfeeding help lower for mothers?","options":["Skin cancer","Breast and ovarian cancer","Lung cancer","Bone cancer"],"correct_answer":"Breast and ovarian cancer","explanation":"WHO notes that breastfeeding helps prevent breast and ovarian cancer in mothers."}
+      ]
+    },
+    "burns_first_aid_safety": {
+      "title": "Burns, Injury & First Aid Safety",
+      "patient_niche": "injury prevention, home safety, occupational health, pediatric safety",
+      "source": "WHO Burns Fact Sheet",
+      "questions": [
+        {"id":"Q145","question":"Approximately how many deaths occur globally each year from burns?","options":["1,000","18,000","180,000","1.8 million"],"correct_answer":"180,000","explanation":"WHO estimates 180,000 deaths occur annually worldwide due to burns, mostly in low- and middle-income countries."},
+        {"id":"Q146","question":"What is the correct first-aid step for a fresh thermal burn?","options":["Apply ice directly","Use cool running water to reduce burn temperature","Apply butter or oil","Pop any blisters immediately"],"correct_answer":"Use cool running water to reduce burn temperature","explanation":"WHO recommends cool running water to reduce burn temperature; ice can worsen tissue damage."},
+        {"id":"Q147","question":"Which of these should NOT be applied to a burn wound?","options":["Clean cloth for transport","Turmeric (haldi), oil, or raw cotton","Cool running water","Medical attention"],"correct_answer":"Turmeric (haldi), oil, or raw cotton","explanation":"WHO explicitly advises against applying paste, oil, turmeric, or raw cotton to burns as these can worsen injury or cause infection."},
+        {"id":"Q148","question":"Where do most burn injuries occur according to WHO data?","options":["In hospitals","In the home and workplace","Only in industrial factories","Only outdoors"],"correct_answer":"In the home and workplace","explanation":"WHO reports that burns occur mainly in the home and workplace, making household safety measures important."},
+        {"id":"Q149","question":"What simple home safety measure helps prevent scald burns?","options":["Increasing hot water tap temperature","Lowering the temperature in hot water taps","Removing all safety devices","There is no way to prevent scalds"],"correct_answer":"Lowering the temperature in hot water taps","explanation":"WHO recommends lowering hot water tap temperatures as an effective burn prevention strategy, especially for children."}
+      ]
+    }
+  }
+}

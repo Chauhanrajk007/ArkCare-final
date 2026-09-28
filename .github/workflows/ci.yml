@@ -1,0 +1,49 @@
+name: ArkCare Self-Hosted CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "Frontend/tests/**"
+      - "scripts/**"
+      - ".github/workflows/full-e2e.yml"
+      - ".github/workflows/ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: arkcare-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend-build:
+    name: Frontend build
+    runs-on: [self-hosted]
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: Frontend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Node version
+        run: node --version
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Next.js
+        run: npm run build
+
+  backend-check:
+    name: Backend syntax
+    runs-on: [self-hosted]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python version
+        run: python --version || python3 --version
+      - name: Compile backend
+        shell: bash
+        run: |
+          if command -v python >/dev/null 2>&1; then
+            python -m py_compile Backend/chatbotwithpdf.py
+          else
+            python3 -m py_compile Backend/chatbotwithpdf.py
+          fi

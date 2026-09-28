@@ -1,0 +1,125 @@
+name: CareQuest Full Validation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: carequest-full-validation
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: [self-hosted]
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Frontend install and build
+        working-directory: Frontend
+        env:
+          NEXT_PUBLIC_CAREQUEST_TEST_BOOKING_BYPASS: "true"
+        run: |
+          npm ci
+          npm run build
+
+      - name: Timezone and DST invariants
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { localDateTimeToUtc } from "./Frontend/lib/carequest/time.mjs";
+          const india = localDateTimeToUtc(
+            { year: 2026, month: 9, day: 28 },
+            "09:00",
+            "Asia/Kolkata"
+          ).toISOString();
+          if (india !== "2026-09-28T03:30:00.000Z") {
+            throw new Error("India timezone conversion failed: " + india);
+          }
+          const nyAfterDst = localDateTimeToUtc(
+            { year: 2026, month: 3, day: 9 },
+            "09:00",
+            "America/New_York"
+          ).toISOString();
+          if (nyAfterDst !== "2026-03-09T13:00:00.000Z") {
+            throw new Error("DST conversion failed: " + nyAfterDst);
+          }
+          console.log("CareQuest timezone/DST invariants PASS");
+          NODE
+
+      - name: Backend syntax
+        shell: bash
+        run: |
+          if command -v python >/dev/null 2>&1; then
+            python -m py_compile Backend/chatbotwithpdf.py
+          else
+            python3 -m py_compile Backend/chatbotwithpdf.py
+          fi
+
+      - name: Demo seed script syntax
+        shell: bash
+        run: node --check Frontend/scripts/seed-carequest-demo.mjs
+
+
+      - name: Install blockchain dependencies
+        working-directory: Blockchain
+        run: npm install
+
+      - name: Compile CareQuest contracts
+        working-directory: Blockchain
+        run: npm run compile
+
+      - name: Bridge syntax
+        working-directory: Blockchain
+        run: node --check bridge-server.js
+
+      - name: MST testnet bridge smoke
+        working-directory: Blockchain
+        env:
+          BRIDGEKEY_PRIVATE_KEY: ${{ secrets.BRIDGEKEY_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          # The chain is MST testnet. Reading /health and a wallet derivation is
+          # free; a real mint is not, so that part only runs with a funded key.
+          node scripts/wait-for-rpc.js
+
+          if [ -z "${BRIDGEKEY_PRIVATE_KEY:-}" ] || [ ! -f runtime/deployment.json ]; then
+            echo "::notice::BRIDGEKEY_PRIVATE_KEY or runtime/deployment.json is" \
+                 "absent (both are git-ignored). Skipping the live bridge smoke."
+            exit 0
+          fi
+
+          CAREQUEST_BLOCKCHAIN_BRIDGE_PORT=18546 node bridge-server.js > runtime/bridge-ci.log 2>&1 &
+          BRIDGE_PID=$!
+          trap 'kill $BRIDGE_PID 2>/dev/null || true' EXIT
+
+          BRIDGE="http://127.0.0.1:18546"
+          for _ in $(seq 1 60); do
+            curl -fsS "$BRIDGE/health" >/dev/null 2>&1 && break
+            sleep 1
+          done
+
+          echo "health: $(curl -fsS "$BRIDGE/health")"
+          curl -fsS "$BRIDGE/health" | grep '"hospitalCapsuleAddress"'
+
+          WALLET=$(curl -fsS -X POST -H 'Content-Type: application/json' \
+            -d '{"reference":"ci-patient"}' "$BRIDGE/wallet" \
+            | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).walletAddress))')
+          echo "derived wallet: $WALLET"
+          curl -fsS "$BRIDGE/hospital-balance?walletAddress=$WALLET&tokenId=1001"
+          echo
+
+      - name: Install browser test dependency
+        working-directory: Frontend
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install chromium
+
+      - name: CareQuest integrated browser E2E
+        env:
+          CAREQUEST_E2E_BASE_URL: http://127.0.0.1:13001
+          NEXT_PUBLIC_CAREQUEST_TEST_BOOKING_BYPASS: "true"
+          CAREQUEST_TEST_BOOKING_BYPASS: "true"
+        run: node Frontend/tests/carequest-e2e.cjs

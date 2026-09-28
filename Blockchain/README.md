@@ -1,0 +1,136 @@
+# CareQuest blockchain
+
+This package is ArkCare's proof rail for the Capsule reward loop and the
+append-only audit chain. It runs on the **MST public testnet**
+(`https://testnetrpc.mstblockchain.com`, chain ID `91562037`). There is no local
+chain — no Hardhat node, no in-memory EVM, no faucet dance.
+
+## How it fits together
+
+```
+Next.js server actions
+        |  HTTP (127.0.0.1 only)
+        v
+  bridge-server.js  :8546   <-- the ONLY component holding a signing key
+        |
+        v
+  MST public testnet
+```
+
+The frontend never holds a key and never talks to a chain node. It calls the
+bridge, which signs and settles. That is why `BRIDGEKEY_PRIVATE_KEY` lives only
+in the git-ignored root `arkcare.env` and never reaches the browser.
+
+The bridge also stays bound to `127.0.0.1`, so it is never exposed by a public
+tunnel. Only the Next.js port is ever published.
+
+Contracts deployed (`runtime/deployment.json` records the live addresses):
+
+- `CareQuestCapsule.sol`: legacy zero-decimal, non-transferable CAP contract.
+- `CareQuestHospitalCapsules.sol`: non-transferable multi-token hospital
+  Capsule contract, one token ID per hospital program. The seeded demo uses
+  token ID `1001` for CITY, `1002` LOTUS, `1003` SUNRISE, `1004` METRO.
+- `CareQuestAuditAnchor.sol`: separate Merkle-root audit commitment contract.
+
+## Commands
+
+Run from the `Blockchain/` directory. The bridge and the deploy script both read
+`../arkcare.env` and write `runtime/`, so the working directory matters.
+
+| Command | What it does |
+| --- | --- |
+| `npm install` | install the 19 packages (ethers, solc, OpenZeppelin) |
+| `npm run compile` | compile the contracts, print their sizes, deploy nothing |
+| `npm run wait-rpc` | block until the MST RPC answers `eth_chainId` |
+| `npm run deploy:mst` | deploy all three contracts, rewrite `runtime/deployment.json` |
+| `npm run bridge` | start the bridge on `127.0.0.1:8546` |
+
+## Running it
+
+Requires `arkcare.env` at the repository root with `BRIDGEKEY_PRIVATE_KEY` set
+to a funded testnet key. Testnet tokens come from
+<https://faucet.masterstroke.academy>.
+
+Windows:
+
+```bat
+scripts\start-mst-bridge.cmd
+```
+
+Linux / macOS — from the `Blockchain/` directory:
+
+```bash
+npm install
+npm run bridge
+```
+
+`scripts/start-local-all.sh` does the same as part of the full stack, and
+refuses to start if the key or the deployment record is missing.
+
+On startup the bridge prints the network, chain ID, signer, balance, contract
+addresses and explorer, and warns if the signer has no tokens or lacks
+`ANCHOR_ROLE` (which makes `/anchor` revert). Check it any time:
+
+```bash
+curl http://127.0.0.1:8546/health
+```
+
+### Deploying the contracts
+
+```bash
+cd Blockchain
+npm run deploy:mst
+```
+
+This compiles with `solc`, deploys all three contracts from
+`BRIDGEKEY_PRIVATE_KEY`, and overwrites `runtime/deployment.json`. You only need
+to run it when deploying fresh contracts; the bridge reuses the existing file.
+
+On a public RPC you cannot sign for the accounts it lists, so the bridge derives
+each patient's receive address deterministically from the bridge key rather than
+borrowing a network account. The same patient id always yields the same address.
+
+## Configuration
+
+Read from the repository root `arkcare.env`:
+
+| Variable | Purpose |
+| --- | --- |
+| `CAREQUEST_BLOCKCHAIN_ENABLED` | master switch for the frontend |
+| `CAREQUEST_BLOCKCHAIN_BRIDGE_URL` | where the frontend posts (`:8546`) |
+| `CAREQUEST_BLOCKCHAIN_BRIDGE_PORT` | port the bridge listens on |
+| `CAREQUEST_BLOCKCHAIN_EXPLORER_URL` | transaction links in the audit UI |
+| `MST_RPC_URL` | RPC used by `npm run deploy:mst` |
+| `BRIDGEKEY_PRIVATE_KEY` | signing key held by the bridge |
+
+## Bridge endpoints
+
+All server-side only; the browser never calls these.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/health` | chain, block number, signer, contract addresses, explorer |
+| `POST` | `/wallet` | deterministic patient receive address for a reference id |
+| `GET` | `/balance` | legacy CAP balance |
+| `POST` | `/mint` / `/burn` | legacy CAP mint / correction burn |
+| `GET` | `/hospital-balance` | per-program Capsule balance |
+| `POST` | `/hospital-mint` / `/hospital-burn` | per-program mint / burn |
+| `POST` | `/anchor` | commit a Merkle root to `CareQuestAuditAnchor` |
+
+Every write is idempotent on its `reference`, so a retried request returns the
+original transaction hash instead of double-minting.
+
+## Boundaries
+
+The database `CapsuleAward` ledger stays authoritative. The chain is a proof
+rail, not the system of record, and every caller treats it as non-clinical: if
+the bridge is down, care responses and staff workflows continue and the audit
+batches reconcile later.
+
+Phone/wearable synchronization, proof-of-work mining, mining-pool output and
+public token value shown in the product are explicitly simulated concept layers.
+They are not generated by these contracts.
+
+No patient names, identifiers, diagnoses, report contents, medicines or
+health-event descriptions are written to the chain — only token balances and
+Merkle roots.

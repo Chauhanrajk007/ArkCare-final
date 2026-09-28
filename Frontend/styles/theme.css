@@ -1,0 +1,60 @@
+/*
+ * CareQuest light healthcare theme.
+ * Muted colors intentionally keep the pixel/game layer supportive rather than
+ * arcade-like. Destructive remains reserved for real error/danger feedback.
+ */
+:root,
+[data-theme="light"] {
+  --background: #f7f8f3;
+  --foreground: #22312d;
+
+  --surface: #ffffff;
+  --surface-subtle: #f1f4ef;
+  --surface-muted: #e7ece7;
+  --surface-hover: #edf2ee;
+
+  --text: #22312d;
+  --text-muted: #65746f;
+  --text-subtle: #8b9893;
+
+  --border: #dce4de;
+  --border-strong: #c7d3cb;
+
+  --primary: #58776d;
+  --primary-hover: #49675e;
+  --primary-soft: #e6efeb;
+  --primary-foreground: #ffffff;
+
+  --secondary: #eeeaf3;
+  --secondary-foreground: #57516a;
+
+  --accent: #f4e9e3;
+  --accent-foreground: #765b52;
+
+  --success: #55796a;
+  --success-soft: #e3efe8;
+  --warning: #967747;
+  --warning-soft: #f7f0df;
+  --destructive: #a94f4f;
+  --destructive-soft: #f9e7e7;
+
+  --lavender: #817996;
+  --lavender-soft: #eeebf3;
+  --peach: #b98272;
+  --peach-soft: #f5e9e4;
+  --sky: #6e8790;
+  --sky-soft: #e7eff1;
+  --gold: #9a8150;
+  --gold-soft: #f4efdf;
+
+  --ring: #6b8b80;
+  --input: #cfd9d2;
+
+  --shadow-soft: 0 14px 38px rgba(46, 70, 61, 0.07);
+  --shadow-card: 0 8px 22px rgba(46, 70, 61, 0.055);
+
+  --radius-sm: 0.65rem;
+  --radius-md: 0.9rem;
+  --radius-lg: 1.2rem;
+  --radius-xl: 1.6rem;
+}

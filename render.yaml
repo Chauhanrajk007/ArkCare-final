@@ -1,0 +1,178 @@
+# =============================================================================
+# ArkCare on Render - three services
+#
+#   arkcare-frontend   Next.js 15 app router        (web)
+#   arkcare-backend    FastAPI AI service            (web)
+#   arkcare-bridge     CareQuest blockchain bridge   (web, must stay PRIVATE)
+#
+# Deploy with:  New > Blueprint > point at this repo > Apply
+#
+# Every value marked `sync: false` is a SECRET: Render will prompt for it and
+# store it encrypted. Nothing sensitive is ever read from a committed file.
+#
+# !! The bridge holds BRIDGEKEY_PRIVATE_KEY and can sign transactions. Render
+# !! gives every web service a public HTTPS URL. After the first deploy you MUST
+# !! set the bridge to Private in the dashboard, otherwise anyone on the
+# !! internet can reach a service that holds your chain key.
+# =============================================================================
+
+services:
+  # ----------------------------------------------------------------- frontend
+  - type: web
+    name: arkcare-frontend
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: Frontend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    envVars:
+      # --- blockchain (points at the bridge service below) -------------------
+      - key: CAREQUEST_BLOCKCHAIN_ENABLED
+        value: "true"
+      - key: CAREQUEST_BLOCKCHAIN_BRIDGE_URL
+        # Render gives the bridge a public hostname. If you make it PRIVATE,
+        # replace this with the internal URL Render shows, e.g.
+        # http://arkcare-bridge:10000
+        value: http://arkcare-bridge:10000
+      # Shared secret the bridge requires when it is not on loopback.
+      - key: CAREQUEST_BLOCKCHAIN_BRIDGE_TOKEN
+        generateValue: true
+      # --- session / database ----------------------------------------------
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      # NEXT_PUBLIC_* is inlined at BUILD time, so this must be set here (not
+      # only at runtime) or the browser gets the wrong origin for Agora, the
+      # socket server and the payment callbacks. After the first deploy it is
+      # https://arkcare-frontend.onrender.com - set it and trigger a rebuild.
+      - key: NEXT_PUBLIC_APP_URL
+        value: http://localhost:3000
+      - key: DEMO_LOGIN_ENABLED
+        value: "true"
+      # --- AI / providers ---------------------------------------------------
+      - key: AI_SERVER_URL
+        value: http://arkcare-backend:10000
+      - key: AI_CHAT
+        value: http://arkcare-backend:10000/chat
+      - key: AI_PDF
+        value: http://arkcare-backend:10000/parse_report
+      - key: AI_INTERNAL_TOKEN
+        generateValue: true
+      - key: GROQ_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        value: arkcare
+      - key: PINECONE_DIMENSION
+        value: "1024"
+      - key: PINECONE_CLOUD
+        value: aws
+      - key: PINECONE_REGION
+        sync: false
+      - key: PINECONE_EMBED_MODEL
+        sync: false
+      # --- realtime / media ------------------------------------------------
+      - key: PUSHER_APP_ID
+        sync: false
+      - key: PUSHER_KEY
+        sync: false
+      - key: PUSHER_SECRET
+        sync: false
+      - key: PUSHER_CLUSTER
+        sync: false
+      - key: NEXT_PUBLIC_PUSHER_KEY
+        sync: false
+      - key: NEXT_PUBLIC_PUSHER_CLUSTER
+        sync: false
+      - key: AGORA_APP_ID
+        sync: false
+      - key: AGORA_APP_CERTIFICATE
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+      # --- scheduler --------------------------------------------------------
+      - key: CAREQUEST_JOB_SECRET
+        generateValue: true
+      - key: NEXT_PUBLIC_SCANNER_URL
+        value: ""
+
+  # ----------------------------------------------------------------- backend
+  - type: web
+    name: arkcare-backend
+    runtime: python
+    plan: free
+    region: oregon
+    rootDir: Backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn chatbotwithpdf:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /docs
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: CHARACTER_AI_TOKEN
+        sync: false
+      - key: CHARACTER_ID
+        sync: false
+      # Must match the frontend so the proxy can talk to it.
+      - key: AI_INTERNAL_TOKEN
+        generateValue: true
+      - key: AI_SERVER_URL
+        value: http://arkcare-backend:10000
+      - key: MONGODB_URI
+        sync: false
+
+  # ------------------------------------------------------------------ bridge
+  # Holds BRIDGEKEY_PRIVATE_KEY. Keep this service PRIVATE.
+  - type: web
+    name: arkcare-bridge
+    runtime: node
+    plan: starter
+    region: oregon
+    rootDir: Blockchain
+    buildCommand: npm ci
+    startCommand: npm run bridge
+    healthCheckPath: /health
+    envVars:
+      # Container networking: Render requires 0.0.0.0, and the bridge refuses to
+      # start on 0.0.0.0 without a shared token.
+      - key: CAREQUEST_BLOCKCHAIN_BRIDGE_HOST
+        value: 0.0.0.0
+      - key: CAREQUEST_BLOCKCHAIN_BRIDGE_TOKEN
+        # MUST be the same value the frontend has.
+        sync: false
+      - key: BRIDGEKEY_PRIVATE_KEY
+        sync: false
+      - key: MST_RPC_URL
+        value: https://testnetrpc.mstblockchain.com
+      - key: CAREQUEST_BLOCKCHAIN_EXPLORER_URL
+        value: https://testnet.mstscan.com
+      # The bridge dedupes writes in runtime/bridge-state.json, which is
+      # ephemeral on Render. That only costs a re-send after a restart, never a
+      # double mint, because every write is keyed by its own reference.
+
+# =============================================================================
+# Database
+# =============================================================================
+# Render does not host MongoDB. Create a free M0 cluster at
+# <https://www.mongodb.com/atlas>, allow Render's egress IP (or 0.0.0.0/0 for a
+# demo), and paste the SRV string into MONGODB_URI on BOTH arkcare-frontend and
+# arkcare-backend. There is deliberately no `databases:` block here.
+# =============================================================================
